@@ -3,8 +3,8 @@ export const MOCK_DATA = [
     id: "demo001",
     name: "demo1",
     avatarUrl: "",
-    totalReviewedPr: 0,
-    avgReviewTime: 0,
+    totalReviewedPr: 10,
+    avgReviewTime: 10,
   },
   {
     id: "demo002",
