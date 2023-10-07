@@ -1,3 +1,5 @@
+import "tailwindcss/tailwind.css";
+
 import React, { useState } from "react";
 
 import Link from "next/link";
@@ -14,7 +16,7 @@ export default function ReviewersList() {
       <div>reviewers list</div>
       <Link href="/">Back to home</Link>
       {reviewersList.map((reviewersInfo, index) => (
-        <Card key={index} className="max-w-xs mx-auto">
+        <Card key={index}>
           <Link href="/dashboard/reviewer-info">info card</Link>
           <ProgressBar value={32} className="mt-2" />
           <span>{reviewersInfo.name}</span>
