@@ -13,8 +13,8 @@ export default function ReviewersList() {
     <div>
       <div>reviewers list</div>
       <Link href="/">Back to home</Link>
-      {reviewersList.map((reviewersInfo) => (
-        <Card className="max-w-xs mx-auto">
+      {reviewersList.map((reviewersInfo, index) => (
+        <Card key={index} className="max-w-xs mx-auto">
           <Link href="/dashboard/reviewer-info">info card</Link>
           <ProgressBar value={32} className="mt-2" />
           <span>{reviewersInfo.name}</span>
