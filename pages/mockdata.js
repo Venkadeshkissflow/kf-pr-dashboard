@@ -1,0 +1,51 @@
+export const MOCK_DATA = [
+  {
+    id: "demo001",
+    name: "demo1",
+    avatarUrl: "",
+    totalReviewedPr: 0,
+    avgReviewTime: 0,
+  },
+  {
+    id: "demo002",
+    name: "demo2",
+    avatarUrl: "",
+    totalReviewedPr: 0,
+    avgReviewTime: 0,
+  },
+  {
+    id: "demo003",
+    name: "demo3",
+    avatarUrl: "",
+    totalReviewedPr: 0,
+    avgReviewTime: 0,
+  },
+  {
+    id: "demo004",
+    name: "demo4",
+    avatarUrl: "",
+    totalReviewedPr: 0,
+    avgReviewTime: 0,
+  },
+  {
+    id: "demo005",
+    name: "demo5",
+    avatarUrl: "",
+    totalReviewedPr: 0,
+    avgReviewTime: 0,
+  },
+  {
+    id: "demo006",
+    name: "demo6",
+    avatarUrl: "",
+    totalReviewedPr: 0,
+    avgReviewTime: 0,
+  },
+  {
+    id: "demo007",
+    name: "demo7",
+    avatarUrl: "",
+    totalReviewedPr: 0,
+    avgReviewTime: 0,
+  },
+];
