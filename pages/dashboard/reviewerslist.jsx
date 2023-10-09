@@ -9,7 +9,17 @@ export default function ReviewersList() {
   const [reviewersList, setReviewersList] = useState(MOCK_DATA);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = () => {};
+  const handleSearch = (event) => {
+    const searchValue = event.target.value;
+    setSearchTerm(searchValue);
+    if (searchValue === "") {
+      setReviewersList(MOCK_DATA);
+    }
+    setReviewersList((list) => {
+      return list.filter((data) => data.name.includes(searchValue));
+    });
+    console.log(event.target.value);
+  };
 
   return (
     <div className="grid grid-rows-[auto-1fr] h-screen">

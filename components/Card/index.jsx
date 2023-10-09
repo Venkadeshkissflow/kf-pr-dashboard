@@ -6,18 +6,21 @@ export default function CardComponent({ reviewerInfo }) {
   const { name, avatarUrl, totalReviewedPr, avgReviewTime } = reviewerInfo;
 
   return (
-    <Card className="flex gap-4 mb-4">
+    <Card className="flex gap-4 mb-4 p-2">
       <Image
-        className="rounded"
-        src="/vercel.png"
-        width={50}
-        height={50}
+        src="/avatar.jpg"
+        width={70}
+        height={70}
         alt="Picture of the author"
       />
-      <div className="grid grid-rows-[auto-1fr]">
-        <span>{name}</span>
-        <span>Total reviewed pr: {totalReviewedPr}</span>
-        <span>Average reviewed time : {avgReviewTime}</span>
+      <div class="grid grid-cols-3 w-full">
+        <div class="col-span-3 font-semibold text-l">{name}</div>
+        <div class="col-span-1 font-normal text-base">
+          Total reviewed pr: {totalReviewedPr}
+        </div>
+        <div class="col-span-1 font-normal text-base">
+          Average reviewed time : {avgReviewTime}
+        </div>
       </div>
     </Card>
   );
