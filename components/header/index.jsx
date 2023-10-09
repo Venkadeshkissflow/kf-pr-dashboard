@@ -1,4 +1,4 @@
-import Head from "next/Head";
+import { handleSignOut } from "../../utils";
 
 export default function Header({ leftRenderer }) {
   return (

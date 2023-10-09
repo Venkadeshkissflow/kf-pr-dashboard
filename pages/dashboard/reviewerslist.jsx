@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 
-import CardComponent from "../../components/Card";
+import CardComponent from "../../components/card";
 import { MOCK_DATA } from "../mockdata";
 import { Header, Toolbar } from "../../components";
 

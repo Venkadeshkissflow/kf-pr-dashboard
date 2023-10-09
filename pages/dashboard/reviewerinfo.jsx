@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { Header, Toolbar } from "../../components";
 
-export default function ReviewersList() {
+export default function ReviewersInfo() {
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = () => {};
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function ReviewersList() {
               alt="Back icon"
               width={24}
               height={24}
-              // className="cursor-pointer"
+              className="cursor-pointer"
             />
           </div>
         }

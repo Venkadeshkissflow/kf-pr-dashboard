@@ -1,4 +1,4 @@
-import Header from "./header"
-import Toolbar from "./toolbar"
+import Header from "./header";
+import Toolbar from "./toolbar";
 
-export { Header  , Toolbar}
+export { Header, Toolbar };
