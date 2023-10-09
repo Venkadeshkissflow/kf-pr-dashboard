@@ -8,7 +8,7 @@ export default function Header({ leftRenderer }) {
         <h1 className="text-white font-bold">PR Dashboard</h1>
       </div>
       <div className="flex items-center">
-        <button className="bg-red-500 text-white px-4 py-2">Logout</button>
+        <button className="bg-red-500 text-white px-4 py-2" onClick={handleSignOut}>Logout</button>
       </div>
     </div>
   );
