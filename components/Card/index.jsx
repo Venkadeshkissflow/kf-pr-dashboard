@@ -13,12 +13,12 @@ export default function CardComponent({ reviewerInfo }) {
         height={70}
         alt="Picture of the author"
       />
-      <div class="grid grid-cols-3 w-full">
-        <div class="col-span-3 font-semibold text-l">{name}</div>
-        <div class="col-span-1 font-normal text-base">
+      <div className="grid grid-cols-3 w-full">
+        <div className="col-span-3 font-semibold text-l">{name}</div>
+        <div className="col-span-1 font-normal text-base">
           Total reviewed pr: {totalReviewedPr}
         </div>
-        <div class="col-span-1 font-normal text-base">
+        <div className="col-span-1 font-normal text-base">
           Average reviewed time : {avgReviewTime}
         </div>
       </div>
