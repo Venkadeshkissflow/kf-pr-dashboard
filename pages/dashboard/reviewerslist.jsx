@@ -22,20 +22,18 @@ export default function ReviewersList() {
   };
 
   return (
-    <div className="grid grid-rows-[auto-1fr] h-screen">
-      <div>
-        <Header />
-        <Toolbar
-          title={"User list"}
-          searchTerm={searchTerm}
-          handleSearch={handleSearch}
-        />
-      </div>
-      <section className="h-full overflow-auto p-4">
+    <div className="h-screen flex flex-col">
+      <Header />
+      <Toolbar
+        title={"User list"}
+        searchTerm={searchTerm}
+        handleSearch={handleSearch}
+      />
+      <div className="h-full overflow-y-auto	grid auto-rows-max p-4">
         {reviewersList.map((reviewerInfo) => (
           <CardComponent reviewerInfo={reviewerInfo} key={reviewerInfo.id} />
         ))}
-      </section>
+      </div>
     </div>
   );
 }
