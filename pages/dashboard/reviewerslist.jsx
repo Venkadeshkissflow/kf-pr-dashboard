@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 
-import CardComponent from "../../components/card";
 import { MOCK_DATA } from "../mockdata";
-import { Header, Toolbar } from "../../components";
+import { Header, Toolbar, CardComponent } from "../../components";
 
 export default function ReviewersList() {
   const [reviewersList, setReviewersList] = useState(MOCK_DATA);
