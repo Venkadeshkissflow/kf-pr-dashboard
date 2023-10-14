@@ -6,7 +6,7 @@ export default function CardComponent({ reviewerInfo, onClick }) {
   const { name, avatarUrl, totalReviewedPr, avgReviewTime } = reviewerInfo;
 
   return (
-    <Card onClick={onClick} className="flex gap-4 mb-4 p-2">
+    <Card onClick={onClick} className="animate-swipeIn flex gap-4 mb-4 p-2">
       <Image
         src="/avatar.jpg"
         width={70}

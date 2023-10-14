@@ -3,15 +3,13 @@ import Image from "next/image";
 import "tailwindcss/tailwind.css";
 import { useRouter } from "next/navigation";
 
-import { Header, Toolbar } from "../../../components/index";
+import { Header, Toolbar, CardComponent } from "../../../components/index";
 
 export default function ReviewersInfo() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const handleSearch = () => {};
   const router = useRouter();
 
   return (
-    <div>
+    <div className="h-screen flex flex-col">
       <Header
         leftRenderer={
           <div
@@ -30,11 +28,17 @@ export default function ReviewersInfo() {
           </div>
         }
       />
-      <Toolbar
-        title={"User info"}
-        searchTerm={searchTerm}
-        handleSearch={handleSearch}
-      />
+      <Toolbar title={"User info"} enableSearch={false} />
+      <div className="h-full overflow-y-auto grid auto-rows-max p-4">
+        <CardComponent
+          reviewerInfo={{
+            name: "demo1",
+            avatarUrl: "",
+            totalReviewedPr: "24",
+            avgReviewTime: "12hrs",
+          }}
+        />
+      </div>
     </div>
   );
 }
