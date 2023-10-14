@@ -3,7 +3,7 @@ import Image from "next/image";
 import "tailwindcss/tailwind.css";
 import { useRouter } from "next/navigation";
 
-import { Header, Toolbar } from "../../components";
+import { Header, Toolbar } from "../../../components/index";
 
 export default function ReviewersInfo() {
   const [searchTerm, setSearchTerm] = useState("");
