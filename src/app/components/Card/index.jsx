@@ -1,13 +1,24 @@
+"use client";
+
 import Image from "next/image";
 
 import { Card } from "@tremor/react";
+import { useRouter } from "next/navigation";
 
 export default function ReviewerInfoCard({ reviewerInfo, onClick }) {
   const { name, totalReviewedPr, avgReviewTime, profileUrl, avatarUrl } =
     reviewerInfo;
+  const router = useRouter();
+
+  function handleOnClick() {
+    router.push(`./reviewerinfo/${reviewerInfo.id}`);
+  }
 
   return (
-    <Card onClick={onClick} className="animate-swipeIn flex gap-4 mb-4 p-2">
+    <Card
+      onClick={handleOnClick}
+      className="animate-swipeIn flex gap-4 mb-4 p-2"
+    >
       <Image
         href="profileUrl"
         width={70}

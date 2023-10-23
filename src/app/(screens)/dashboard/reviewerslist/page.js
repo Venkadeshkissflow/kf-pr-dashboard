@@ -1,7 +1,7 @@
 // import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import { MOCK_DATA } from "../mockdata.js";
 import {
@@ -27,7 +27,6 @@ async function getReviewersList() {
 export default async function ReviewersList({ projects }) {
   const reviewersList = await getReviewersList();
   console.log(reviewersList, "projects");
-  // const router = useRouter();
 
   // const [reviewersList, setReviewersList] = useState(MOCK_DATA);
   // const [searchTerm, setSearchTerm] = useState("");
@@ -50,11 +49,7 @@ export default async function ReviewersList({ projects }) {
       <Toolbar title={"User list"} searchTerm={""} handleSearch={() => null} />
       <div className="h-full overflow-y-auto	grid auto-rows-max p-4">
         {reviewersList.map((reviewerInfo) => (
-          <ReviewerInfoCard
-            // onClick={() => router.push(`./reviewerinfo/${reviewerInfo.id}`)}
-            reviewerInfo={reviewerInfo}
-            key={reviewerInfo.id}
-          />
+          <ReviewerInfoCard reviewerInfo={reviewerInfo} key={reviewerInfo.id} />
         ))}
       </div>
     </div>
