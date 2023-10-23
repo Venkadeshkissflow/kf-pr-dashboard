@@ -15,7 +15,11 @@ async function getReviewersList() {
     "https://pr-stats.deveditor.workers.dev/pr-stats/api/author"
   );
 
-  console.log(reviewersListresponse);
+  if (reviewersListresponse.status !== 200) {
+    return [];
+  }
+
+  console.log(reviewersListresponse.status, "reviewersListresponse");
 
   return reviewersListresponse.json();
 }
@@ -42,8 +46,8 @@ export default async function ReviewersList({ projects }) {
 
   return (
     <div className="h-screen flex flex-col">
-      {/* <Header pageTitle={"Reviewers list"} /> */}
-      {/* <Toolbar title={"User list"} searchTerm={""} handleSearch={() => null} /> */}
+      <Header pageTitle={"Reviewers list"} />
+      <Toolbar title={"User list"} searchTerm={""} handleSearch={() => null} />
       <div className="h-full overflow-y-auto	grid auto-rows-max p-4">
         {reviewersList.map((reviewerInfo) => (
           <ReviewerInfoCard
