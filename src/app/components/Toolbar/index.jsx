@@ -2,7 +2,7 @@ import styles from "./toolbar.module.css";
 
 export default function Toolbar({
   title,
-  handleSearch,
+  // handleSearch,
   searchTerm = "",
   enableSearch = true,
 }) {
@@ -16,7 +16,7 @@ export default function Toolbar({
               type="search"
               placeholder="Search"
               value={searchTerm}
-              onChange={handleSearch}
+              // onChange={handleSearch}
               className={styles.searchInput}
             />
           </div>
