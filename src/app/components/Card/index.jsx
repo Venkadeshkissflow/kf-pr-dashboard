@@ -15,10 +15,7 @@ export default function ReviewerInfoCard({ reviewerInfo, onClick }) {
   }
 
   return (
-    <Card
-      onClick={handleOnClick}
-      className="animate-swipeIn flex gap-4 mb-4 p-2"
-    >
+    <Card onClick={handleOnClick} className="animate-swipeIn flex gap-4 p-2">
       <Image
         href="profileUrl"
         width={70}

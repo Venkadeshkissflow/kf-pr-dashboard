@@ -1,9 +1,5 @@
-// import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 
-import Link from "next/link";
-
-import { MOCK_DATA } from "../mockdata.js";
 import {
   Header,
   Toolbar,
@@ -47,7 +43,7 @@ export default async function ReviewersList({ projects }) {
     <div className="h-screen flex flex-col">
       <Header pageTitle={"Reviewers list"} />
       <Toolbar title={"User list"} searchTerm={""} handleSearch={() => null} />
-      <div className="h-full overflow-y-auto	grid auto-rows-max p-4">
+      <div className="h-full overflow-y-auto gap-4	grid auto-rows-max p-4">
         {reviewersList.map((reviewerInfo) => (
           <ReviewerInfoCard reviewerInfo={reviewerInfo} key={reviewerInfo.id} />
         ))}
