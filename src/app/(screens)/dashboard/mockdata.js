@@ -1,6 +1,6 @@
 export const MOCK_DATA = [
   {
-    id: "venkadesh001",
+    id: "saravanan10393",
     name: "Venkadesh S",
     avatarUrl: "",
     totalReviewedPr: 10,
@@ -14,7 +14,7 @@ export const MOCK_DATA = [
     avgReviewTime: 0,
   },
   {
-    id: "sara001",
+    id: "10221219.0",
     name: "Saravanan Ramupillai",
     avatarUrl: "",
     totalReviewedPr: 0,
@@ -28,7 +28,7 @@ export const MOCK_DATA = [
     avgReviewTime: 0,
   },
   {
-    id: "manu001",
+    id: "saravanadn10393",
     name: "Maneesh K",
     avatarUrl: "",
     totalReviewedPr: 0,

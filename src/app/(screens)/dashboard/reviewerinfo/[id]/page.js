@@ -1,17 +1,20 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "tailwindcss/tailwind.css";
-import { useRouter, useParams } from "next/navigation";
+// import "tailwindcss/tailwind.css";
+// import { useRouter, useParams } from "next/navigation";
 import { Card, Title, LineChart } from "@tremor/react";
 
-import { Header, Toolbar, ReviewerInfoCard } from "../../../components/index";
+import {
+  Header,
+  Toolbar,
+  ReviewerInfoCard,
+} from "../../../../components/index";
 import { MOCK_REVIEWERINFO } from "../../mockdata";
 
-export default function ReviewersInfo() {
-  const router = useRouter();
-  const pathName = useParams();
-  console.log(router, pathName, "router");
+export default function ReviewersInfo({ params }) {
+  // const pathName = useParams();
+  console.log(params, "router");
 
   const chartdata = [
     {
@@ -42,33 +45,15 @@ export default function ReviewersInfo() {
     //...
   ];
 
-  console.log(MOCK_REVIEWERINFO[pathName.id].reviews);
-  const reviewedPrInfo = MOCK_REVIEWERINFO[pathName.id].reviews;
+  console.log(MOCK_REVIEWERINFO[params.id].reviews);
+  const reviewedPrInfo = MOCK_REVIEWERINFO[params.id].reviews;
 
   const valueFormatter = (number) =>
     `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
 
   return (
     <div className="h-screen flex flex-col">
-      <Header
-        pageTitle={"Reviewer info"}
-        leftRenderer={
-          <div
-            className="flex mr-2"
-            onClick={() => {
-              router.back();
-            }}
-          >
-            <Image
-              src="/back.svg"
-              alt="Back icon"
-              width={24}
-              height={24}
-              className="cursor-pointer"
-            />
-          </div>
-        }
-      />
+      <Header moveBack={true} pageTitle={"Reviewer info"} />
       <Toolbar title={"User info"} enableSearch={false} />
       <div className="h-full overflow-y-auto grid auto-rows-max p-4">
         <ReviewerInfoCard
@@ -94,7 +79,7 @@ export default function ReviewersInfo() {
         <Card>
           <Title>Reviewer pr's</Title>
           {reviewedPrInfo.map((prInfo) => {
-            return <Link href={``}>{prInfo}</Link>;
+            return <div>{prInfo.pullRequestId}</div>;
           })}
         </Card>
       </div>
