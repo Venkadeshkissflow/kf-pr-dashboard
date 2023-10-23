@@ -1,8 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-// import "tailwindcss/tailwind.css";
-// import { useRouter, useParams } from "next/navigation";
+
 import { Card, Title, LineChart } from "@tremor/react";
 
 import {
@@ -10,11 +7,22 @@ import {
   Toolbar,
   ReviewerInfoCard,
 } from "../../../../components/index";
-import { MOCK_REVIEWERINFO } from "../../mockdata";
 
-export default function ReviewersInfo({ params }) {
-  // const pathName = useParams();
-  console.log(params, "router");
+async function getReviewerInfo(id) {
+  const response = await fetch(
+    `https://pr-stats.deveditor.workers.dev/pr-stats/api/author/${id}`
+  );
+
+  if (response.status !== 200) {
+    return {};
+  }
+
+  return response.json();
+}
+
+export default async function ReviewersInfo({ params }) {
+  const reviewerInfo = await getReviewerInfo(params.id);
+  const reviewedPrInfo = reviewerInfo.reviews;
 
   const chartdata = [
     {
@@ -45,17 +53,11 @@ export default function ReviewersInfo({ params }) {
     //...
   ];
 
-  console.log(MOCK_REVIEWERINFO[params.id].reviews);
-  const reviewedPrInfo = MOCK_REVIEWERINFO[params.id].reviews;
-
-  const valueFormatter = (number) =>
-    `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
-
   return (
     <div className="h-screen flex flex-col">
       <Header moveBack={true} pageTitle={"Reviewer info"} />
       <Toolbar title={"User info"} enableSearch={false} />
-      <div className="h-full overflow-y-auto grid auto-rows-max p-4">
+      <div className="h-full overflow-y-auto grid auto-rows-max p-4 gap-4">
         <ReviewerInfoCard
           reviewerInfo={{
             name: "demo1",
@@ -72,12 +74,10 @@ export default function ReviewersInfo({ params }) {
             index="submittedAt"
             categories={["reviewTime", "commentsCount"]}
             colors={["emerald", "gray"]}
-            // valueFormatter={valueFormatter}
-            // yAxisWidth={40}
           />
         </Card>
         <Card>
-          <Title>Reviewer pr's</Title>
+          <Title>Total reviewed pr: {reviewerInfo.totalReviewedPr}</Title>
           {reviewedPrInfo.map((prInfo) => {
             return <div>{prInfo.pullRequestId}</div>;
           })}
