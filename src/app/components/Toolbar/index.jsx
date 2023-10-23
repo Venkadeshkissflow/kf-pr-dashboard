@@ -3,7 +3,7 @@ import styles from "./toolbar.module.css";
 export default function Toolbar({
   title,
   handleSearch,
-  searchTerm,
+  searchTerm = "",
   enableSearch = true,
 }) {
   return (

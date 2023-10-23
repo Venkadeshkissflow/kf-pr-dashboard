@@ -22,6 +22,7 @@ const Welcome = ({ user }) => {
         className={styles.welcomeTitle}
       >
         <span className="flex items-center gap-2">
+          {/* to do: need to check with next/image component  */}
           <img
             src={user.image}
             className="rounded-full"
