@@ -5,13 +5,13 @@ import Image from "next/image";
 import { Card } from "@tremor/react";
 import { useRouter } from "next/navigation";
 
-export default function ReviewerInfoCard({ reviewerInfo, onClick }) {
+export default function ReviewerInfoCard({ reviewerInfo, handleClick }) {
   const { name, totalReviewedPr, avgReviewTime, profileUrl, avatarUrl } =
     reviewerInfo;
   const router = useRouter();
 
   function handleOnClick() {
-    router.push(`./reviewerinfo/${reviewerInfo.id}`);
+    if (handleClick) router.push(`./reviewerinfo/${reviewerInfo.id}`);
   }
 
   return (
