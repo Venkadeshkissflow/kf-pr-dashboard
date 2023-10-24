@@ -45,7 +45,11 @@ export default async function ReviewersList({ projects }) {
       <Toolbar title={"User list"} searchTerm={""} handleSearch={() => null} />
       <div className="h-full overflow-y-auto gap-4	grid auto-rows-max p-4">
         {reviewersList.map((reviewerInfo) => (
-          <ReviewerInfoCard reviewerInfo={reviewerInfo} key={reviewerInfo.id} />
+          <ReviewerInfoCard
+            handleClick={true}
+            reviewerInfo={reviewerInfo}
+            key={reviewerInfo.id}
+          />
         ))}
       </div>
     </div>
