@@ -1,8 +1,9 @@
+"use client";
+
 import styles from "./toolbar.module.css";
 
 export default function Toolbar({
   title,
-  // handleSearch,
   searchTerm = "",
   enableSearch = true,
 }) {
@@ -16,7 +17,7 @@ export default function Toolbar({
               type="search"
               placeholder="Search"
               value={searchTerm}
-              // onChange={handleSearch}
+              onChange={() => console.log("search")}
               className={styles.searchInput}
             />
           </div>

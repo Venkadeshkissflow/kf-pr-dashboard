@@ -42,11 +42,15 @@ export default async function ReviewersList({ projects }) {
   return (
     <div className="h-screen flex flex-col">
       <Header pageTitle={"Reviewers list"} />
-      <Toolbar title={"User list"} searchTerm={""} handleSearch={() => null} />
+      <Toolbar
+        title={"User list"}
+        searchTerm={""}
+        // handleSearch={() => console.log("search")}
+      />
       <div className="h-full overflow-y-auto gap-4	grid auto-rows-max p-4">
         {reviewersList.map((reviewerInfo) => (
           <ReviewerInfoCard
-            handleClick={true}
+            isClickable={true}
             reviewerInfo={reviewerInfo}
             key={reviewerInfo.id}
           />

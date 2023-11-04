@@ -24,34 +24,38 @@ export default async function ReviewersInfo({ params }) {
   const reviewerInfo = await getReviewerInfo(params.id);
   const reviewedPrInfo = reviewerInfo.reviews;
 
-  const chartdata = [
-    {
-      year: 1970,
-      "Export Growth Rate": 2.04,
-      "Import Growth Rate": 1.53,
+  function getFormattedDate(originalData) {
+    const date = new Date(originalData);
+
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+
+    return `${day}/${month}/${year}`;
+  }
+
+  const formattedData = reviewedPrInfo.map(function formatteDataForClientSide(
+    prInfo
+  ) {
+    return {
+      ...prInfo,
+      submittedAt: getFormattedDate(prInfo.submittedAt),
+    };
+  });
+
+  const sumOfCommentsCount = reviewedPrInfo.reduce(
+    (accumulator, { commentsCount }) => {
+      return accumulator + commentsCount;
     },
-    {
-      year: 1971,
-      "Export Growth Rate": 1.96,
-      "Import Growth Rate": 1.58,
+    0
+  );
+
+  const sumOfReviewTime = reviewedPrInfo.reduce(
+    (accumulator, { reviewTime }) => {
+      return accumulator + reviewTime;
     },
-    {
-      year: 1972,
-      "Export Growth Rate": 1.96,
-      "Import Growth Rate": 1.61,
-    },
-    {
-      year: 1973,
-      "Export Growth Rate": 1.93,
-      "Import Growth Rate": 1.61,
-    },
-    {
-      year: 1974,
-      "Export Growth Rate": 1.88,
-      "Import Growth Rate": 1.67,
-    },
-    //...
-  ];
+    0
+  );
 
   return (
     <div className="h-screen flex flex-col">
@@ -65,15 +69,33 @@ export default async function ReviewersInfo({ params }) {
             totalReviewedPr: "24",
             avgReviewTime: "12hrs",
           }}
+          isClickable={false}
         />
+        <div className="flex gap-4">
+          <Card>
+            <div></div>
+            <Title>Comments count</Title>
+            <div className="font-bold	text-lg text-cyan-600	">
+              {sumOfCommentsCount}
+            </div>
+          </Card>
+          <Card>
+            <div></div>
+            <Title>Review time</Title>
+            <div className="font-bold	text-lg text-lime-600	">
+              {sumOfReviewTime}
+            </div>
+          </Card>
+        </div>
         <Card>
           <Title>Reviewer chart</Title>
           <LineChart
             className="mt-6"
-            data={reviewedPrInfo}
+            data={formattedData}
             index="submittedAt"
             categories={["reviewTime", "commentsCount"]}
-            colors={["emerald", "gray"]}
+            colors={["lime", "cyan"]}
+            // valueFormatter={axisFormatter}
           />
         </Card>
         <Card>
