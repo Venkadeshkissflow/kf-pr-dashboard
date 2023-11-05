@@ -18,6 +18,9 @@
 .reviewerListContainer {
   width: 20%;
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
   overflow-y: hidden;
   border-inline-end: 1px solid gray;
 }
@@ -32,10 +35,10 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 8px;
-  margin: 8px;
+  gap: 12px;
+  /* margin: 8px; */
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 5px;
   border: 1px solid rgb(66, 62, 62);
   overflow-y: auto;
 }
@@ -43,4 +46,12 @@
 .reviwerdData {
   height: 100%;
   margin: 20px;
+}
+
+.searchInput {
+  padding: 8px;
+  outline: 1px solid gray;
+  border-radius: 5px;
+  padding-left: 12px;
+  width: 100%;
 }

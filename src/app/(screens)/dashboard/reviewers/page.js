@@ -39,6 +39,13 @@ export default async function ReviewersDetails() {
       </div>
       <div className={styles.reviewerContainer}>
         <div className={styles.reviewerListContainer}>
+          <input
+            type="search"
+            placeholder="Search"
+            // value={searchTerm}
+            onChange={() => console.log("search")}
+            className={styles.searchInput}
+          />
           <div className={styles.list}>
             {reviewersList.map((reviewerInfo) => (
               <ReviewerInfoCard
