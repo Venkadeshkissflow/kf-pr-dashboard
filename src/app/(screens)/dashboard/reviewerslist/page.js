@@ -5,6 +5,7 @@ import {
   Toolbar,
   ReviewerInfoCard,
 } from "../../../components/index.jsx";
+import { getUserProfilePic } from "@/app/common.js";
 
 async function getReviewersList() {
   const reviewersListresponse = await fetch(
@@ -53,6 +54,7 @@ export default async function ReviewersList({ projects }) {
             isClickable={true}
             reviewerInfo={reviewerInfo}
             key={reviewerInfo.id}
+            userProfile={getUserProfilePic(reviewerInfo.name)}
           />
         ))}
       </div>
