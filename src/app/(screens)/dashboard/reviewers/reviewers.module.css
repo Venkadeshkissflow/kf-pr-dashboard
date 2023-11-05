@@ -1,0 +1,46 @@
+.Wrapper {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+
+.reviewerContainer {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.reviewerListContainer {
+  width: 20%;
+  display: flex;
+  overflow-y: hidden;
+  border-inline-end: 1px solid gray;
+}
+
+.reviewerInfo {
+  flex: 3;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgb(66, 62, 62);
+  overflow-y: auto;
+}
+
+.reviwerdData {
+  height: 100%;
+  margin: 20px;
+}

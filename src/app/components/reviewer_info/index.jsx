@@ -2,11 +2,7 @@ import React from "react";
 
 import { Card, Title, LineChart } from "@tremor/react";
 
-import {
-  Header,
-  Toolbar,
-  ReviewerInfoCard,
-} from "../../../../components/index";
+import { Header, Toolbar, ReviewerInfoCard } from "..";
 import { getUserProfilePic } from "@/app/common";
 
 async function getReviewerInfo(id) {
@@ -21,9 +17,9 @@ async function getReviewerInfo(id) {
   return response.json();
 }
 
-export default async function ReviewersInfo({ params }) {
-  const reviewerInfo = await getReviewerInfo(params.id);
-  const reviewedPrInfo = reviewerInfo.reviews;
+export async function ReviewersInfo({ userInfo }) {
+  const reviewerInfo = await getReviewerInfo(userInfo.id);
+  const reviewedPrInfo = reviewerInfo?.reviews;
 
   function getFormattedDate(originalData) {
     const date = new Date(originalData);
@@ -59,10 +55,8 @@ export default async function ReviewersInfo({ params }) {
   );
 
   return (
-    <div className="h-screen flex flex-col">
-      <Header moveBack={true} pageTitle={"Reviewer info"} />
-      <Toolbar title={"User info"} enableSearch={false} />
-      <div className="h-full overflow-y-auto grid auto-rows-max p-4 gap-4">
+    <>
+      <div className="h-auto overflow-y-auto grid auto-rows-max p-4 gap-4">
         <ReviewerInfoCard
           reviewerInfo={{
             name: "demo1",
@@ -107,6 +101,6 @@ export default async function ReviewersInfo({ params }) {
           })}
         </Card>
       </div>
-    </div>
+    </>
   );
 }
