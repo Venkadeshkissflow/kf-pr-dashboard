@@ -9,7 +9,13 @@ import { getUserProfilePic } from "@/app/common.js";
 
 async function getReviewersList() {
   const reviewersListresponse = await fetch(
-    "https://pr-stats.deveditor.workers.dev/pr-stats/api/author"
+    "https://pr-stats.deveditor.workers.dev/pr-stats/api/author",
+    {
+      method: "GET",
+      withCredentials: true,
+      crossorigin: true,
+      mode: "no-cors",
+    }
   );
 
   if (reviewersListresponse.status !== 200) {

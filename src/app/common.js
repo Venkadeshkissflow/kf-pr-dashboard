@@ -1,3 +1,7 @@
-export const getUserProfilePic = (userName) => {
+export const getUserProfilePic = (userName = "") => {
   return `https://avatars.githubusercontent.com/${userName}`;
+};
+
+export const COMMON_DASHBOARD_CARD_INFO = {
+  title: "Dashboard",
 };

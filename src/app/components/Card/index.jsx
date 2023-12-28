@@ -1,43 +1,36 @@
 "use client";
 
 import Image from "next/image";
+import PropTypes from "prop-types";
 
 import { Card } from "@tremor/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-export default function ReviewerInfoCard({
-  reviewerInfo,
-  isClickable,
-  userProfile,
-}) {
-  const { name, totalReviewedPr, avgReviewTime, profileUrl, avatarUrl } =
-    reviewerInfo;
-  const router = useRouter();
+ReviewerInfoCard.PropTypes = {
+  title: PropTypes.string,
+  avatar: PropTypes.string,
+  className: PropTypes.string,
+};
 
+export default function ReviewerInfoCard({ title, avatar, className }) {
   function handleOnClick() {
-    // if (isClickable) router.push(`./reviewerinfo/${reviewerInfo.id}`);
     console.log("clicked");
   }
 
   return (
-    <div className="cursor-pointer" onClick={handleOnClick}>
-      <Card onClick={handleOnClick} className="animate-swipeIn flex gap-4 p-2">
+    <div className={`cursor-pointer`} onClick={handleOnClick}>
+      <Card
+        onClick={handleOnClick}
+        className={`animate-swipeIn flex gap-4 p-2 ${className}`}
+      >
         <Image
-          style={{ borderRadius: "50%" }}
-          src={userProfile}
+          style={{ borderRadius: "50%", backgroundColor: "white" }}
+          src={avatar}
           width={70}
           height={70}
           alt="Author profile"
         />
-        <div className="grid grid-cols-3 w-full">
-          <div className="col-span-3 font-semibold text-l">{name}</div>
-          {/* <div className="col-span-1 font-normal text-base">
-          Total reviewed pr: <span>{totalReviewedPr}</span>
-        </div>
-        <div className="col-span-1 font-normal text-base">
-          Average reviewed time : <span>{avgReviewTime}</span>
-        </div> */}
+        <div className="flex items-center col-span-3 font-semibold text-l min-w-40 text-ellipsis	">
+          {title}
         </div>
       </Card>
     </div>
