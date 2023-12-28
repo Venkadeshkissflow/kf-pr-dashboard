@@ -98,6 +98,7 @@ function ReviewersList({ reviewersList, isLoading }) {
       <ReviewerInfoCard
         title={COMMON_DASHBOARD_CARD_INFO.title}
         avatar={getUserProfilePic()}
+        className={"bg-blue-950  text-white	"}
       />
       {reviewersList.map((reviewerInfo) => (
         <ReviewerInfoCard
