@@ -1,25 +1,98 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Card, Title, LineChart } from "@tremor/react";
 
 import { Header, Toolbar, ReviewerInfoCard } from "..";
 import { getUserProfilePic } from "@/app/common";
 
-async function getReviewerInfo(id) {
-  const response = await fetch(
-    `https://pr-stats.deveditor.workers.dev/pr-stats/api/author/${id}`
-  );
+const MOCK_USERINFO = {
+  saravanan10393: {
+    totalReviewedPr: 2,
+    reviews: [
+      {
+        pullRequestId: "PR_kwDOEwhtk8491p9nf",
+        reviewTime: 1722000,
+        commentsCount: 0,
+        submittedAt: "2022-08-23T16:33:59.000Z",
+      },
+      {
+        pullRequestId: "PR_kwDOEwmmhk84910CYr",
+        reviewTime: 492000,
+        commentsCount: 0,
+        submittedAt: "2022-08-25T17:30:33.000Z",
+      },
+    ],
+  },
+  saravanadn10393: {
+    totalReviewedPr: 2,
+    reviews: [
+      {
+        pullRequestId: "PR_kwDOEwhtdk8491p9nf",
+        reviewTime: 861000,
+        commentsCount: 0,
+        submittedAt: "2022-08-23T16:33:59.000Z",
+      },
+      {
+        pullRequestId: "PR_kwDOEwmdmhk84910CYr",
+        reviewTime: 246000,
+        commentsCount: 0,
+        submittedAt: "2022-08-25T17:30:33.000Z",
+      },
+    ],
+  },
+  "10221219.0": {
+    totalReviewedPr: 4,
+    reviews: [
+      {
+        pullRequestId: "PR_kwDOFek3hs5bFRLG",
+        reviewTime: 13636000,
+        commentsCount: 0,
+        submittedAt: "2023-09-25T09:34:27.000Z",
+      },
+      {
+        pullRequestId: "PR_kwDOFek3hs5cQnX0",
+        reviewTime: 72325000,
+        commentsCount: 0,
+        submittedAt: "2023-10-10T09:32:26.000Z",
+      },
+      {
+        pullRequestId: "PR_kwDOFek3hs5cfkJM",
+        reviewTime: 9688000,
+        commentsCount: 0,
+        submittedAt: "2023-10-11T12:47:12.000Z",
+      },
+      {
+        pullRequestId: "PR_kwDOFek3hs5cmHOm",
+        reviewTime: 876000,
+        commentsCount: 0,
+        submittedAt: "2023-10-12T06:41:09.000Z",
+      },
+    ],
+  },
+};
 
-  if (response.status !== 200) {
-    return {};
-  }
+export function ReviewersInfo({ userInfo }) {
+  const [userDetails, setUserDetails] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-  return response.json();
-}
-
-export async function ReviewersInfo({ userInfo }) {
-  const reviewerInfo = await getReviewerInfo(userInfo.id);
-  const reviewedPrInfo = reviewerInfo?.reviews;
+  useEffect(function onInit() {
+    // fetch(
+    //   `https://pr-stats.deveditor.workers.dev/pr-stats/api/author/${userInfo.id}`
+    //   // {
+    //   //   method: "GET",
+    //   //   withCredentials: true,
+    //   //   crossorigin: true,
+    //   //   mode: "no-cors",
+    //   //   "Access-Control-Allow-Origin": "*",
+    //   // }
+    // ).then((reviewerInfo) => {
+    //   console.log("reviewerslist", data);
+    //   setUserDetails(reviewerInfo?.reviews);
+    //   setLoading(false);
+    // });
+    setUserDetails(MOCK_USERINFO[userInfo.id]);
+    setLoading(false);
+  }, []);
 
   function getFormattedDate(originalData) {
     const date = new Date(originalData);
@@ -31,28 +104,32 @@ export async function ReviewersInfo({ userInfo }) {
     return `${day}/${month}/${year}`;
   }
 
-  const formattedData = reviewedPrInfo.map(function formatteDataForClientSide(
-    prInfo
-  ) {
-    return {
-      ...prInfo,
-      submittedAt: getFormattedDate(prInfo.submittedAt),
-    };
-  });
+  const formattedData = userDetails.reviews.map(
+    function formatteDataForClientSide(prInfo) {
+      return {
+        ...prInfo,
+        submittedAt: getFormattedDate(prInfo.submittedAt),
+      };
+    }
+  );
 
-  const sumOfCommentsCount = reviewedPrInfo.reduce(
+  const sumOfCommentsCount = userDetails.reviews.reduce(
     (accumulator, { commentsCount }) => {
       return accumulator + commentsCount;
     },
     0
   );
 
-  const sumOfReviewTime = reviewedPrInfo.reduce(
+  const sumOfReviewTime = userDetails.reviews.reduce(
     (accumulator, { reviewTime }) => {
       return accumulator + reviewTime;
     },
     0
   );
+
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
 
   return (
     <>
@@ -65,7 +142,7 @@ export async function ReviewersInfo({ userInfo }) {
             avgReviewTime: "12hrs",
           }}
           isClickable={false}
-          userProfile={getUserProfilePic(reviewerInfo.name)}
+          userProfile={getUserProfilePic(userInfo.name)}
         />
         <div className="flex gap-4">
           <Card>
@@ -96,7 +173,7 @@ export async function ReviewersInfo({ userInfo }) {
         </Card>
         <Card>
           <Title>Total reviewed pr: {reviewerInfo.totalReviewedPr}</Title>
-          {reviewedPrInfo.map((prInfo) => {
+          {userDetails.map((prInfo) => {
             return <div>{prInfo.pullRequestId}</div>;
           })}
         </Card>

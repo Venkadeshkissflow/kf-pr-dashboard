@@ -8,7 +8,7 @@ export default function Header({ moveBack = false, pageTitle }) {
   const router = useRouter();
 
   return (
-    <div className="h-12 flex justify-between items-center bg-blue-950 p-4">
+    <div className="h-12 flex justify-between items-center bg-cyan-950 p-4">
       <div className="flex items-center">
         {moveBack && (
           <div

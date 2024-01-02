@@ -2,9 +2,17 @@
 
 import React, { useEffect, useState, useRef } from "react";
 
-import { Header, ReviewerInfoCard } from "../../../components/index.jsx";
+import {
+  Header,
+  ReviewerInfoCard,
+  ReviewersInfo,
+} from "../../../components/index.jsx";
 
-import { COMMON_DASHBOARD_CARD_INFO, getUserProfilePic } from "@/app/common.js";
+import {
+  COMMON_DASHBOARD_CARD_INFO,
+  DASHBOARD_TYPE,
+  getUserProfilePic,
+} from "@/app/common.js";
 
 import styles from "./reviewers.module.css";
 
@@ -34,6 +42,10 @@ export default function ReviewersDetails() {
   const reviewersList = useRef([]);
   const [finalList, setFinalList] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [selectedUserInfo, setSelectedUserInfo] = useState();
+  const [dashboardType, setDashboardType] = useState(
+    DASHBOARD_TYPE.COMMON_DASHBOARD
+  );
 
   useEffect(() => {
     // fetch(`https://pr-stats.deveditor.workers.dev/pr-stats/api/author`, {
@@ -67,6 +79,13 @@ export default function ReviewersDetails() {
     }
   }
 
+  function onHandleSelectUserInfo(type, userInfo = {}) {
+    setDashboardType(type);
+    if (userInfo) {
+      setSelectedUserInfo(userInfo);
+    }
+  }
+
   return (
     <div className={styles.Wrapper}>
       <div className={styles.header}>
@@ -81,15 +100,28 @@ export default function ReviewersDetails() {
             onChange={onHandleSearch}
             className={styles.searchInput}
           />
-          <ReviewersList reviewersList={finalList} isLoading={isLoading} />
+          <ReviewersList
+            onHandleClick={(type) => onHandleSelectUserInfo()}
+            reviewersList={finalList}
+            isLoading={isLoading}
+          />
         </div>
-        info here
+        {dashboardType === DASHBOARD_TYPE.COMMON_DASHBOARD && (
+          <div>dashboard</div>
+        )}
+
+        {dashboardType !== DASHBOARD_TYPE.COMMON_DASHBOARD &&
+          selectedUserInfo && (
+            <div className={styles.reviwerdData}>
+              <ReviewersInfo userInfo={selectedUserInfo} />
+            </div>
+          )}
       </div>
     </div>
   );
 }
 
-function ReviewersList({ reviewersList, isLoading }) {
+function ReviewersList({ reviewersList, isLoading, onHandleClick }) {
   if (isLoading) return <p>Loading...</p>;
   if (!reviewersList) return <p>No profile data</p>;
 
@@ -98,13 +130,18 @@ function ReviewersList({ reviewersList, isLoading }) {
       <ReviewerInfoCard
         title={COMMON_DASHBOARD_CARD_INFO.title}
         avatar={getUserProfilePic()}
-        className={"bg-blue-950  text-white	"}
+        className={"bg-cyan-100 border-2 border-cyan-950"}
+        onHandleClick={() => onHandleClick(DASHBOARD_TYPE.COMMON_DASHBOARD)}
       />
       {reviewersList.map((reviewerInfo) => (
         <ReviewerInfoCard
           title={reviewerInfo.name}
           key={reviewerInfo.id}
           avatar={getUserProfilePic(reviewerInfo.name)}
+          onHandleClick={() =>
+            onHandleClick(DASHBOARD_TYPE.REVIEWER_INFO, reviewerInfo)
+          }
+          reviewerInfo={reviewerInfo}
         />
       ))}
     </div>

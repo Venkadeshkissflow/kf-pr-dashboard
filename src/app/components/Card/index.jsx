@@ -9,19 +9,22 @@ ReviewerInfoCard.PropTypes = {
   title: PropTypes.string,
   avatar: PropTypes.string,
   className: PropTypes.string,
+  onHandleClick: PropTypes.func,
 };
 
-export default function ReviewerInfoCard({ title, avatar, className }) {
-  function handleOnClick() {
-    console.log("clicked");
-  }
-
+export default function ReviewerInfoCard({
+  title,
+  avatar,
+  className,
+  onHandleClick,
+  reviewerInfo,
+}) {
   return (
-    <div className={`cursor-pointer`} onClick={handleOnClick}>
-      <Card
-        onClick={handleOnClick}
-        className={`animate-swipeIn flex gap-4 p-2 ${className}`}
-      >
+    <div
+      className={`cursor-pointer`}
+      onClick={() => onHandleClick(reviewerInfo)}
+    >
+      <Card className={`animate-swipeIn flex gap-4 p-2 ${className}`}>
         <Image
           style={{ borderRadius: "50%", backgroundColor: "white" }}
           src={avatar}
