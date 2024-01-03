@@ -29,6 +29,7 @@ const MOCK_LIST = [
     profileUrl: "https://github.com/manduelmhtr",
     avatarUrl: "https://avatars.githubusercontent.com/u/saravdanan10393",
   },
+
   {
     id: "10221219.0",
     name: "saravanan10393",
@@ -79,13 +80,6 @@ export default function ReviewersDetails() {
     }
   }
 
-  function onHandleSelectUserInfo(type, userInfo = {}) {
-    setDashboardType(type);
-    if (userInfo) {
-      setSelectedUserInfo(userInfo);
-    }
-  }
-
   return (
     <div className={styles.Wrapper}>
       <div className={styles.header}>
@@ -101,21 +95,26 @@ export default function ReviewersDetails() {
             className={styles.searchInput}
           />
           <ReviewersList
-            onHandleClick={(type) => onHandleSelectUserInfo()}
+            onHandleClick={(type, info) => {
+              console.log(type, info);
+              setDashboardType(type);
+              setSelectedUserInfo(info);
+            }}
             reviewersList={finalList}
             isLoading={isLoading}
           />
         </div>
-        {dashboardType === DASHBOARD_TYPE.COMMON_DASHBOARD && (
-          <div>dashboard</div>
-        )}
-
-        {dashboardType !== DASHBOARD_TYPE.COMMON_DASHBOARD &&
-          selectedUserInfo && (
-            <div className={styles.reviwerdData}>
-              <ReviewersInfo userInfo={selectedUserInfo} />
-            </div>
+        <div className={styles.reviwerdData}>
+          {dashboardType === DASHBOARD_TYPE.COMMON_DASHBOARD ? (
+            <div>dashboard</div>
+          ) : (
+            <>
+              {selectedUserInfo && (
+                <ReviewersInfo userInfo={selectedUserInfo} />
+              )}
+            </>
           )}
+        </div>
       </div>
     </div>
   );

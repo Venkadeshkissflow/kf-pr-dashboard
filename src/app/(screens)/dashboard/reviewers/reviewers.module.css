@@ -16,7 +16,7 @@
 }
 
 .reviewerListContainer {
-  width: 20%;
+  flex: 0 0 22rem;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -45,6 +45,7 @@
 .reviwerdData {
   height: 100%;
   margin: 20px;
+  width: 100%;
 }
 
 .searchInput {

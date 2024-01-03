@@ -94,38 +94,38 @@ export function ReviewersInfo({ userInfo }) {
     setLoading(false);
   }, []);
 
-  function getFormattedDate(originalData) {
-    const date = new Date(originalData);
+  // function getFormattedDate(originalData) {
+  //   const date = new Date(originalData);
 
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
+  //   const year = date.getFullYear();
+  //   const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  //   const day = date.getDate().toString().padStart(2, "0");
 
-    return `${day}/${month}/${year}`;
-  }
+  //   return `${day}/${month}/${year}`;
+  // }
 
-  const formattedData = userDetails.reviews.map(
-    function formatteDataForClientSide(prInfo) {
-      return {
-        ...prInfo,
-        submittedAt: getFormattedDate(prInfo.submittedAt),
-      };
-    }
-  );
+  // const formattedData = userDetails.reviews.map(
+  //   function formatteDataForClientSide(prInfo) {
+  //     return {
+  //       ...prInfo,
+  //       submittedAt: getFormattedDate(prInfo.submittedAt),
+  //     };
+  //   }
+  // );
 
-  const sumOfCommentsCount = userDetails.reviews.reduce(
-    (accumulator, { commentsCount }) => {
-      return accumulator + commentsCount;
-    },
-    0
-  );
+  // const sumOfCommentsCount = userDetails.reviews.reduce(
+  //   (accumulator, { commentsCount }) => {
+  //     return accumulator + commentsCount;
+  //   },
+  //   0
+  // );
 
-  const sumOfReviewTime = userDetails.reviews.reduce(
-    (accumulator, { reviewTime }) => {
-      return accumulator + reviewTime;
-    },
-    0
-  );
+  // const sumOfReviewTime = userDetails.reviews.reduce(
+  //   (accumulator, { reviewTime }) => {
+  //     return accumulator + reviewTime;
+  //   },
+  //   0
+  // );
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -133,8 +133,8 @@ export function ReviewersInfo({ userInfo }) {
 
   return (
     <>
-      <div className="h-auto overflow-y-auto grid auto-rows-max p-4 gap-4">
-        <ReviewerInfoCard
+      <div className="h-auto overflow-y-auto grid auto-rows-max p-4 gap-4 w-full">
+        {/* <ReviewerInfoCard
           reviewerInfo={{
             name: "demo1",
             avatarUrl: "",
@@ -142,40 +142,41 @@ export function ReviewersInfo({ userInfo }) {
             avgReviewTime: "12hrs",
           }}
           isClickable={false}
-          userProfile={getUserProfilePic(userInfo.name)}
-        />
+          // userProfile={getUserProfilePic(userInfo.name)}
+        /> */}
         <div className="flex gap-4">
           <Card>
             <div></div>
             <Title>Comments count</Title>
             <div className="font-bold	text-lg text-cyan-600	">
-              {sumOfCommentsCount}
+              {/* {sumOfCommentsCount} */}0
             </div>
           </Card>
           <Card>
             <div></div>
             <Title>Review time</Title>
             <div className="font-bold	text-lg text-lime-600	">
-              {sumOfReviewTime}
+              {/* {sumOfReviewTime} */}0
             </div>
           </Card>
         </div>
         <Card>
           <Title>Reviewer chart</Title>
-          <LineChart
+          {/* <LineChart
             className="mt-6"
             data={formattedData}
             index="submittedAt"
             categories={["reviewTime", "commentsCount"]}
             colors={["lime", "cyan"]}
             // valueFormatter={axisFormatter}
-          />
+          /> */}
         </Card>
         <Card>
-          <Title>Total reviewed pr: {reviewerInfo.totalReviewedPr}</Title>
+          {/* <Title>Total reviewed pr: {reviewerInfo.totalReviewedPr}</Title>
           {userDetails.map((prInfo) => {
             return <div>{prInfo.pullRequestId}</div>;
-          })}
+          })} */}
+          0
         </Card>
       </div>
     </>
