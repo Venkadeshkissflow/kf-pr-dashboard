@@ -1,12 +1,9 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
-import {
-  Header,
-  ReviewerInfoCard,
-  ReviewersInfo,
-} from "../../../components/index.jsx";
+import { Header, ReviewerInfoCard } from "@/app/components";
 
 import {
   COMMON_DASHBOARD_CARD_INFO,
@@ -39,11 +36,11 @@ const MOCK_LIST = [
   },
 ];
 
-export default function ReviewersDetails() {
+export default function DashboardLayout({ commoninfo, children }) {
   const reviewersList = useRef([]);
   const [finalList, setFinalList] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [selectedUserInfo, setSelectedUserInfo] = useState();
+  const [activeReviewerId, setActiveReviewerId] = useState({});
   const [dashboardType, setDashboardType] = useState(
     DASHBOARD_TYPE.COMMON_DASHBOARD
   );
@@ -94,25 +91,33 @@ export default function ReviewersDetails() {
             onChange={onHandleSearch}
             className={styles.searchInput}
           />
-          <ReviewersList
-            onHandleClick={(type, info) => {
-              console.log(type, info);
-              setDashboardType(type);
-              setSelectedUserInfo(info);
-            }}
-            reviewersList={finalList}
-            isLoading={isLoading}
-          />
+          <div className={styles.list}>
+            <ReviewerInfoCard
+              title={COMMON_DASHBOARD_CARD_INFO.title}
+              avatar={getUserProfilePic()}
+              className={"bg-amber-50 border-2 border-x-amber-600	"}
+              isActive={dashboardType === DASHBOARD_TYPE.COMMON_DASHBOARD}
+              onHandleClick={() => {
+                setDashboardType(DASHBOARD_TYPE.COMMON_DASHBOARD);
+                setActiveReviewerId("");
+              }}
+            />
+            <ReviewersList
+              onHandleReviewerSelect={(reviewerInfo) => {
+                setDashboardType(DASHBOARD_TYPE.REVIEWER_INFO);
+                setActiveReviewerId(reviewerInfo.id);
+              }}
+              activeReviewerId={activeReviewerId}
+              reviewersList={finalList}
+              isLoading={isLoading}
+            />
+          </div>
         </div>
         <div className={styles.reviwerdData}>
           {dashboardType === DASHBOARD_TYPE.COMMON_DASHBOARD ? (
-            <div>dashboard</div>
+            <div>{commoninfo}</div>
           ) : (
-            <>
-              {selectedUserInfo && (
-                <ReviewersInfo userInfo={selectedUserInfo} />
-              )}
-            </>
+            children
           )}
         </div>
       </div>
@@ -120,29 +125,28 @@ export default function ReviewersDetails() {
   );
 }
 
-function ReviewersList({ reviewersList, isLoading, onHandleClick }) {
-  if (isLoading) return <p>Loading...</p>;
-  if (!reviewersList) return <p>No profile data</p>;
+function ReviewersList({
+  reviewersList,
+  isLoading,
+  onHandleReviewerSelect,
+  activeReviewerId,
+}) {
+  const router = useRouter();
 
-  return (
-    <div className={styles.list}>
-      <ReviewerInfoCard
-        title={COMMON_DASHBOARD_CARD_INFO.title}
-        avatar={getUserProfilePic()}
-        className={"bg-cyan-100 border-2 border-cyan-950"}
-        onHandleClick={() => onHandleClick(DASHBOARD_TYPE.COMMON_DASHBOARD)}
-      />
-      {reviewersList.map((reviewerInfo) => (
-        <ReviewerInfoCard
-          title={reviewerInfo.name}
-          key={reviewerInfo.id}
-          avatar={getUserProfilePic(reviewerInfo.name)}
-          onHandleClick={() =>
-            onHandleClick(DASHBOARD_TYPE.REVIEWER_INFO, reviewerInfo)
-          }
-          reviewerInfo={reviewerInfo}
-        />
-      ))}
-    </div>
-  );
+  if (isLoading) return <p>Loading...</p>;
+  if (reviewersList.length === 0) return <p>No profile data</p>;
+
+  return reviewersList.map((reviewerInfo) => (
+    <ReviewerInfoCard
+      title={reviewerInfo.name}
+      key={reviewerInfo.id}
+      isActive={activeReviewerId === reviewerInfo.id}
+      avatar={getUserProfilePic(reviewerInfo.name)}
+      onHandleClick={() => {
+        onHandleReviewerSelect(reviewerInfo);
+        router.push(`/dashboard/userinfo/${reviewerInfo.id}`);
+      }}
+      reviewerInfo={reviewerInfo}
+    />
+  ));
 }

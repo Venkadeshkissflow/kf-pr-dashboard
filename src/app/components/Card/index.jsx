@@ -14,17 +14,23 @@ ReviewerInfoCard.PropTypes = {
 
 export default function ReviewerInfoCard({
   title,
+  isActive,
   avatar,
   className,
   onHandleClick,
-  reviewerInfo,
+  reviewerInfo = {},
 }) {
   return (
     <div
+      type="button"
       className={`cursor-pointer`}
       onClick={() => onHandleClick(reviewerInfo)}
     >
-      <Card className={`animate-swipeIn flex gap-4 p-2 ${className}`}>
+      <Card
+        className={` border-2 border-transparent animate-swipeIn flex gap-4 p-2  ${className}  ${
+          isActive ? "border-cyan-950 bg-cyan-100" : " "
+        }`}
+      >
         <Image
           style={{ borderRadius: "50%", backgroundColor: "white" }}
           src={avatar}
